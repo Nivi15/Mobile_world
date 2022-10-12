@@ -5,7 +5,6 @@
     <classes>
       <class name="SignIn"/>
       <class name="order"/>
-      <class name="LandingPage"/>
       <class name="SignUp"/>
     </classes>
   </test> <!-- Test -->
