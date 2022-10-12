@@ -1,18 +1,9 @@
-
-
-import static org.testng.Assert.assertTrue;
-
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 
 public class LandingPage {
@@ -35,72 +26,52 @@ public class LandingPage {
 	@FindBy(css="a[href='index.html']")
 	WebElement logIn;
 	
-	@Test(dataProvider ="signInDataProvider", priority=2)
+	
 	public void SignIn(String userEmail,String userPassword) {
 		signInButton.click();
 		userName.sendKeys(userEmail);
 		passWord.sendKeys(userPassword);
 		logIn.click();
+		driver.close();
 	}
-		public void isEmailTestPassed(String userEmail) {
-			if(userEmail.length() < 3 || userEmail.length() > 20) {
-				try {
-				assertTrue(logIn.isDisplayed());
-				}
-				catch(NoSuchElementException ex) {}
-			}
-			else
-				Assert.assertEquals("https://mobileworld.banyanpro.com/index.html", driver.getCurrentUrl());
-		}
-		
-		public void isPasswordTestPassed(String userPassword) {
-			if(userPassword.length() < 3 || userPassword.length() > 10) {
-				try {
-				assertTrue(logIn.isDisplayed());
-				}
-				catch(NoSuchElementException ex) {System.out.println("Invalid Password");}
-			}
-			else
-				Assert.assertEquals("https://mobileworld.banyanpro.com/index.html", driver.getCurrentUrl());
-		}
 		
 	
-		        //SignUp
-				@FindBy(css="button[type='submit']")
-				WebElement signIn;
+    //SignUp
+	@FindBy(css="button[type='submit']")
+	WebElement signIn;
 				
-				@FindBy(css="a[href='signup.html']")
-				WebElement signUp;
+	@FindBy(css="a[href='signup.html']")
+	WebElement signUp;
 				
-				@FindBy(css="input[placeholder='First Name']")
-				WebElement firstName;
+	@FindBy(css="input[placeholder='First Name']")
+	WebElement firstName;
 				
-				@FindBy(css="input[placeholder='Last Name']")
-				WebElement lastName;
+	@FindBy(css="input[placeholder='Last Name']")
+	WebElement lastName;
 				
-				@FindBy(css="input[placeholder='Enter Email']")
-				WebElement Email;
+    @FindBy(css="input[placeholder='Enter Email']")
+	WebElement Email;
 				
-				@FindBy(css="input[placeholder='Password']")
-				WebElement password;
+	@FindBy(css="input[placeholder='Password']")
+	WebElement password;
 				
-				@FindBy(css="input[type='date']")
-				WebElement DOB;
+	@FindBy(css="input[type='date']")
+	WebElement DOB;
 				
-				@FindBy(xpath="//*[@id=\"myForm\"]/div[3]/div[4]/input")
-				WebElement gen;
+	@FindBy(xpath="//*[@id=\"myForm\"]/div[3]/div[4]/input")
+	WebElement gen;
 				
-				@FindBy(css="input[type='number']")
-				WebElement Mobnum;
+	@FindBy(css="input[type='number']")
+	WebElement Mobnum;
 				
-				@FindBy(css="textarea[placeholder='Short Bio']")
-				WebElement Shortbio;
+    @FindBy(css="textarea[placeholder='Short Bio']")
+	WebElement Shortbio;
 				
-				@FindBy(xpath="/html[1]/body[1]/div[1]/div[2]/form[1]/div[6]/div[2]/button[1]")
-				WebElement register;
+	@FindBy(xpath="/html[1]/body[1]/div[1]/div[2]/form[1]/div[6]/div[2]/button[1]")
+	WebElement register;
 				
-		@Test(dataProvider = "signUpDataProvider", priority=1)
-		public void SignUp(String fname,String lname,String email,String pwd,String dob,String num,String bio) throws InterruptedException {
+		
+	public void SignUp(String fname,String lname,String email,String pwd,String dob,String num,String bio) throws InterruptedException {
 				
 					signIn.click();
 					signUp.click();
@@ -114,6 +85,8 @@ public class LandingPage {
 					Shortbio.sendKeys(bio);
 					register.click();
 			        driver.switchTo().alert().accept();
+			        driver.close();
+			        driver.quit();
 				}
 					
 		//order
@@ -183,7 +156,7 @@ public class LandingPage {
 		@FindBy(xpath="/html[1]/body[1]/div[1]/div[1]/div[2]/form[1]/div[10]/button[1]")
 		WebElement orderbtn;
 		
-       @Test(dataProvider ="orderDataProvider", priority=3)		
+       	
        public void order(String fname,String lname,String email,String pwd,String num,String add1,String add2,String city,String zip,String cnum) throws InterruptedException {
 			
 			support.click();
@@ -193,7 +166,6 @@ public class LandingPage {
 			String parentId = (String) it.next(); 
 			String childId = (String) it.next();
 			driver.switchTo().window(childId);
-			
 			firstName1.sendKeys(fname);
 			lastName1.sendKeys(lname);
 			Email1.sendKeys(email);
@@ -214,9 +186,10 @@ public class LandingPage {
 			correctadd.click();
 			correctmb.click();
 			orderbtn.click();
-			Thread.sleep(1000);
 			driver.close();
+			driver.quit();
 			}
 }
+
 
 
